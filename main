@@ -26,15 +26,14 @@ while running:
             running = False
 
     # Fill background
-    screen.fill(WHITE)
+    screen.fill(RED)
 
     # Draw red square
     pygame.draw.rect(
         screen,
-        RED,
+        WHITE,
         (square_x, square_y, square_size, square_size)
     )
-
     # Update display
     pygame.display.flip()
 
