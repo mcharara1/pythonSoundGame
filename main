@@ -14,15 +14,15 @@ width, height = 800, 400 #width and hight of window
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Python sound game")
 
-#example Colors(R, G, B)
+
+#example square (to be removed) Colors(R, G, B)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
-#example Square settings
+#example Square (to be removed) settings
 square_size = 100
 square_x = (width - square_size) // 2
 square_y = (height - square_size) // 2
-
 
 
 # Main loop (the game runs inside this while true loop.)
