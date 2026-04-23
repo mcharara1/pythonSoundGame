@@ -2,7 +2,9 @@
 import pygame
 import sys
 import random
-from obstacle1 import exampleFunction1
+import obstacle1
+import time
+
 
 #Initialize pygame
 pygame.init()
@@ -34,9 +36,11 @@ while running:
     # Fill background
     x = random.choice([True,False])
     if x == True:
-        screen.fill(exampleFunction1())
+        screen.fill(obstacle1.exampleFunction1())
+        time.sleep(0.5)
     else:
         screen.fill(RED)
+        time.sleep(0.5)
     
     
     # Draw red square
