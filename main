@@ -1,5 +1,8 @@
+#import all required libraries or functions from other files here
 import pygame
 import sys
+import random
+from obstacle1 import exampleFunction1
 
 #Initialize pygame
 pygame.init()
@@ -18,16 +21,24 @@ square_size = 100
 square_x = (width - square_size) // 2
 square_y = (height - square_size) // 2
 
+
+
 # Main loop (the game runs inside this while true loop.)
 running = True
 while running:
     for event in pygame.event.get(): #check for closing pygame prettymuch all the time lmao
         if event.type == pygame.QUIT:
             running = False
-
+    
+    #trying to call a funciton from a seperate file
     # Fill background
-    screen.fill(RED)
-
+    x = random.choice([True,False])
+    if x == True:
+        screen.fill(exampleFunction1())
+    else:
+        screen.fill(RED)
+    
+    
     # Draw red square
     pygame.draw.rect(
         screen,
