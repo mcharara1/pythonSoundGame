@@ -4,7 +4,7 @@ import sys
 import random
 import obstacle1
 import time
-
+#hi
 
 #Initialize pygame
 pygame.init()
