@@ -4,6 +4,9 @@ import sys
 import random
 import obstacle1
 import time
+import sounddevice as sd
+import numpy as np
+
 #hi
 #white monster
 #Initialize pygame
@@ -22,7 +25,7 @@ WHITE = (255, 255, 255)
 #example Square (to be removed) settings
 square_size = 100
 square_x = (width - square_size) // 2
-square_y = (height - square_size) // 2
+square_y = (height - square_size) // 2  
 
 
 # Main loop (the game runs inside this while true loop.)

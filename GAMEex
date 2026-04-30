@@ -1,5 +1,8 @@
 import pygame
+import sys
 import random
+import obstacle1
+import time
 import sounddevice as sd
 import numpy as np
 
@@ -111,7 +114,7 @@ while running:
 
     # Draw volume meter
     vol_display = min(int(current_volume * 5), 300)
-    pygame.draw.rect(screen, BLUE, (10, 50, vol_display, 15))
+    pygame.draw.rect(screen, BLUE, (15, 50 , vol_display , 15 ))
     vol_text = font.render(f"Vol: {current_volume:.1f}", True, BLACK)
     screen.blit(vol_text, (10, 70))
 
