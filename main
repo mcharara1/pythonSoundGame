@@ -5,7 +5,7 @@ import random
 import obstacle1
 import time
 #hi
-#monster energy 
+#white monster
 #Initialize pygame
 pygame.init()
 
