@@ -33,7 +33,7 @@ while running:
             running = False
     
     #trying to call a funciton from a seperate file
-    # Fill background
+    # Fill background (random is used to make it become green 50% chance)
     x = random.choice([True,False])
     if x == True:
         screen.fill(obstacle1.exampleFunction1())
@@ -43,7 +43,7 @@ while running:
         time.sleep(0.5)
     
     
-    # Draw red square
+    # Draw red square example
     pygame.draw.rect(
         screen,
         WHITE,
