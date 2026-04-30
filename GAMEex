@@ -1,0 +1,121 @@
+import pygame
+import random
+import sounddevice as sd
+import numpy as np
+
+pygame.init()
+
+WIDTH, HEIGHT = 800, 400
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Voice Runner")
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (200, 50, 50)
+GREEN = (50, 180, 50)
+BLUE = (50, 100, 200)
+
+clock = pygame.time.Clock()
+FPS = 60
+GROUND = HEIGHT - 50
+
+# Player
+player = pygame.Rect(100, GROUND - 50, 40, 50)
+player_vel_y = 0.0
+
+# Obstacles
+obstacles = []
+obstacle_timer = 0
+
+# Score
+score = 0
+font = pygame.font.SysFont(None, 36)
+
+# Microphone volume
+current_volume = 0
+
+def audio_callback(indata, frames, time, status):
+    global current_volume
+    volume_norm = np.linalg.norm(indata) * 10
+    current_volume = volume_norm
+
+# Start microphone stream
+stream = sd.InputStream(callback=audio_callback)
+stream.start()
+
+running = True
+while running:
+    clock.tick(FPS)
+    screen.fill(WHITE)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Jetpack mechanic — voice pushes you up, silence brings you down
+    VOLUME_THRESHOLD = 1.0  # lower = more sensitive
+    if current_volume > VOLUME_THRESHOLD:
+        thrust = min(current_volume * 0.8, 10)  # louder = more lift
+        player_vel_y = -thrust
+    else:
+        player_vel_y += 1.5  # gravity pulls you down when quiet
+
+    # Move player
+    player.y = int(player.y + player_vel_y)
+
+    # Floor boundary
+    if player.y >= GROUND - 50:
+        player.y = GROUND - 50
+        player_vel_y = 0.0
+
+    # Ceiling boundary
+    if player.y <= 0:
+        print("Game Over! Score:", score)
+        running = False
+
+    # Difficulty increases over time
+    difficulty = min(score / 10, 5)  # maxes out at level 5
+
+    # Spawn obstacles
+    obstacle_timer += 1
+    spawn_interval = max(20, 60 - int(difficulty * 10))
+    if obstacle_timer > random.randint(spawn_interval, spawn_interval + 40):
+        obs_height = random.randint(int(30 + difficulty * 8), int(60 + difficulty * 12))
+        obs_width = random.randint(int(20 + difficulty * 5), int(35 + difficulty * 8))
+        obs = pygame.Rect(WIDTH, GROUND - obs_height, obs_width, obs_height)
+        obstacles.append(obs)
+        obstacle_timer = 0
+
+    # Move and draw obstacles
+    for obs in obstacles[:]:
+        obs.x -= 6
+        pygame.draw.rect(screen, GREEN, obs)
+        if obs.x < -30:
+            obstacles.remove(obs)
+            score += 1
+
+        # Collision
+        if player.colliderect(obs):
+            print("Game Over! Score:", score)
+            running = False
+
+    # Draw ground
+    pygame.draw.rect(screen, BLACK, (0, GROUND, WIDTH, 10))
+
+    # Draw player
+    pygame.draw.rect(screen, RED, player)
+
+    # Draw score
+    score_text = font.render(f"Score: {score}", True, BLACK)
+    screen.blit(score_text, (10, 10))
+
+    # Draw volume meter
+    vol_display = min(int(current_volume * 5), 300)
+    pygame.draw.rect(screen, BLUE, (10, 50, vol_display, 15))
+    vol_text = font.render(f"Vol: {current_volume:.1f}", True, BLACK)
+    screen.blit(vol_text, (10, 70))
+
+    pygame.display.flip()
+
+stream.stop()
+pygame.quit()
