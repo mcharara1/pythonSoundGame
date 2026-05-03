@@ -6,54 +6,36 @@ import obstacle1
 import time
 import sounddevice as sd
 import numpy as np
-
-#hi
-#white monster
+import bar
 #Initialize pygame
 pygame.init()
 
-#Set up the display (game window)
-width, height = 800, 400 #width and hight of window
+#Set up the display (screen)
+width, height = 1300, 800 #width and hight of window
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Python sound game")
+clock = pygame.time.Clock()
+screen.fill('white')
 
-#eras sucks
-#example square (to be removed) Colors(R, G, B)
-RED = (255, 0, 0)
-WHITE = (255, 255, 255)
+#set up the game surface gwindow
+#gwindow = pygame.Surface((width - 400,height - 200))
+gwindow = pygame.image.load('graphics/gborder.png')
 
-#example Square (to be removed) settings
-square_size = 100
-square_x = (width - square_size) // 2
-square_y = (height - square_size) // 2  
-
-
+#ground = pygame.image.load('graphics/ground.png') # do this when ground pic is set up
+#set up the power up Bar surface bwindow
+bwindow = pygame.Surface((200,height - 200))
+bwindow.fill('white')
 # Main loop (the game runs inside this while true loop.)
 running = True
 while running:
     for event in pygame.event.get(): #check for closing pygame prettymuch all the time lmao
         if event.type == pygame.QUIT:
             running = False
-    
-    #trying to call a funciton from a seperate file
-    # Fill background (random is used to make it become green 50% chance)
-    x = random.choice([True,False])
-    if x == True:
-        screen.fill(obstacle1.exampleFunction1())
-        time.sleep(0.5)
-    else:
-        screen.fill(RED)
-        time.sleep(0.5)
-    
-    
-    # Draw red square example
-    pygame.draw.rect(
-        screen,
-        WHITE,
-        (square_x, square_y, square_size, square_size)
-    )
-    # Update display (while running is set to true, until set to false aka game over or smthng)
-    pygame.display.update()
+    screen.blit(gwindow, (100, 100)) #put game window on screen
+    screen.blit(bwindow, (1000, 100)) #put bar window on screen
+    bwindow.blit(bar.barGraphic, (0,0))
+    pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)
+    clock.tick(60)    # cap framerate to 60 fps
 
 # Quit pygame once while loop is broken
 pygame.quit()
