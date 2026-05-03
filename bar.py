@@ -11,6 +11,6 @@ import numpy as np
 # the if statement returns the propper bar image, and also would initiate the propper obstacle defeat sequence. 
 
 
-#find out how to udjust this number:        ↓     from 0-10.
+#simply set barGraphic to whatever numb:    ↓     from 0-10  in each if else thingy
 barGraphic = pygame.image.load('graphics/bar7.png')
 
