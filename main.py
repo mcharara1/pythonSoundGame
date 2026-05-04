@@ -39,15 +39,17 @@ while running:
     i = i+1
     if i == 4:
         i = 0
-    dogGraphic = Runner.dogGraphicSet[i]
-    #gwindow.fill('white')
-    #gwindow.blit(gborder, (0,0))
-    screen.blit(dogGraphic, (300,500))
-    screen.blit(obstacle.slime, (600,500))
-    screen.blit(gwindow, (100, 100)) #put game window on screen
-    screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow
+    
+    #load things that appear in game window here
+    dogGraphic = Runner.dogGraphicSet[i] #this loads the propper dog pic in the animation
+    screen.blit(dogGraphic, (300,500)) #this places the dog on the screen
+    screen.blit(obstacle.slime, (600,500)) #this places the slime on screen
+
+    screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow, such as ground or whatever
+    screen.blit(gwindow, (100, 100)) #put game window on screen (the red border)
+    #load things that appear outside the game window here
     screen.blit(bwindow, (1000, 100)) #put bar window on screen
-    barGraphic = random.choice(bar.barGraphicSet)
+    barGraphic = random.choice(bar.barGraphicSet) #randomly select a bar image here
     bwindow.blit(barGraphic, (0,0)) #put bar graphic (from bar.py)
 
     pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)
