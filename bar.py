@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-import obstacle1
+import obstacle
 import time
 import sounddevice as sd
 import numpy as np
@@ -26,5 +26,5 @@ barGraphicSet = [
     pygame.image.load('graphics/bar10.png')
 ]
 #simply set barGraphic to whatever numb:    ↓     from 0-10  in each if else thingy
-barGraphic = random.choice(barGraphicSet)
+#barGraphic = random.choice(barGraphicSet)
 
