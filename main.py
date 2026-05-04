@@ -35,12 +35,7 @@ while running:
             running = False
 
     screen.fill('grey32')
-    screen.blit(gwindow, (100, 100)) #put game window on screen
     bwindow.blit(bar.barGraphicSet[1], (0,0))
-    screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow
-    screen.blit(bwindow, (1000, 100)) #put bar window on screen
-    barGraphic = random.choice(bar.barGraphicSet)
-    bwindow.blit(barGraphic, (0,0)) #put bar graphic (from bar.py)
     i = i+1
     if i == 4:
         i = 0
@@ -48,6 +43,12 @@ while running:
     #gwindow.fill('white')
     #gwindow.blit(gborder, (0,0))
     screen.blit(dogGraphic, (300,500))
+    screen.blit(obstacle.slime, (600,500))
+    screen.blit(gwindow, (100, 100)) #put game window on screen
+    screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow
+    screen.blit(bwindow, (1000, 100)) #put bar window on screen
+    barGraphic = random.choice(bar.barGraphicSet)
+    bwindow.blit(barGraphic, (0,0)) #put bar graphic (from bar.py)
 
     pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)
     clock.tick(15)    # cap framerate to 60 fps
