@@ -1,2 +1,0 @@
-#function for generating runner character and its run aanimation here 
-#yuck
