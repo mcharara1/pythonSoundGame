@@ -25,6 +25,5 @@ barGraphicSet = [
     pygame.image.load('graphics/bar9.png'),
     pygame.image.load('graphics/bar10.png')
 ]
-#simply set barGraphic to whatever numb:    ↓     from 0-10  in each if else thingy
 #barGraphic = random.choice(barGraphicSet)
 
