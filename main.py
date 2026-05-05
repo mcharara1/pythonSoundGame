@@ -20,6 +20,7 @@ clock = pygame.time.Clock()
 i=0
 #set up the game surface gwindow
 #gwindow = pygame.Surface((width - 400,height - 200))
+bground = pygame.image.load('graphics/Background.png')
 gborder = pygame.image.load('graphics/gborder.png')
 gwindow = gborder
 mask = pygame.image.load('graphics/mask.png')
@@ -42,6 +43,7 @@ while running:
     
     #load things that appear in game window here
     dogGraphic = Runner.dogGraphicSet[i] #this loads the propper dog pic in the animation
+    screen.blit(bground, (100,100))
     screen.blit(dogGraphic, (300,500)) #this places the dog on the screen
     screen.blit(obstacle.slime, (600,500)) #this places the slime on screen
 
