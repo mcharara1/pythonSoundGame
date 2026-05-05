@@ -53,7 +53,8 @@ while running:
     screen.blit(gwindow, (100, 100)) #put game window on screen (the red border)
     #load things that appear outside the game window here
     screen.blit(bwindow, (1000, 100)) #put bar window on screen
-    barGraphic = random.choice(bar.barGraphicSet) #randomly select a bar image here
+    bwindow.blit(pygame.image.load('graphics/bar0.png'), (0,0))
+    #barGraphic = random.choice(bar.barGraphicSet) #randomly select a bar image here
     bar_level = bar.get_bar_level() #randomly select a bar image here                  # call the function to get 0–10
     bwindow.blit(bar.barGraphicSet[bar_level], (0,0))
     pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)

@@ -6,7 +6,7 @@ import obstacle
 import time
 import sounddevice as sd
 import numpy as np
-import pythonSoundGame.Erikfloder.bar as bar
+import bar
 import Runner
 
 #Initialize pygame
@@ -25,7 +25,7 @@ stream.start()
 
 # ── Config ─────────────────────────────────────────────────────────────────
 BASE_THRESHOLDS = [0.01, 0.02, 0.04, 0.07, 0.11, 0.16, 0.22, 0.29, 0.37, 0.46]
-SENSITIVITY     = 1.0  # lower = more sensitive, higher = need to shout more
+SENSITIVITY     = 200  # lower = more sensitive, higher = need to shout more
 THRESHOLDS      = [t * SENSITIVITY for t in BASE_THRESHOLDS]
 
 barGraphicSet = [
