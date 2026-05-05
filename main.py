@@ -46,6 +46,7 @@ while running:
     screen.blit(obstacle.slime, (600,500)) #this places the slime on screen
 
     screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow, such as ground or whatever
+    
     screen.blit(gwindow, (100, 100)) #put game window on screen (the red border)
     #load things that appear outside the game window here
     screen.blit(bwindow, (1000, 100)) #put bar window on screen
