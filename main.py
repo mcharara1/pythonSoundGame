@@ -54,11 +54,12 @@ while running:
     #load things that appear outside the game window here
     screen.blit(bwindow, (1000, 100)) #put bar window on screen
     barGraphic = random.choice(bar.barGraphicSet) #randomly select a bar image here
-    bwindow.blit(barGraphic, (0,0)) #put bar graphic (from bar.py)
-
+    bar_level = bar.get_bar_level() #randomly select a bar image here                  # call the function to get 0–10
+    bwindow.blit(bar.barGraphicSet[bar_level], (0,0))
     pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)
     clock.tick(15)    # cap framerate to 60 fps
 
 # Quit pygame once while loop is broken
 pygame.quit()
+bar.stream.stop()
 sys.exit()

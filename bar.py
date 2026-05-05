@@ -1,3 +1,4 @@
+
 import pygame
 import sys
 import random
@@ -5,12 +6,27 @@ import obstacle
 import time
 import sounddevice as sd
 import numpy as np
+import pythonSoundGame.Erikfloder.bar as bar
+import Runner
+
+#Initialize pygame
 pygame.init()
 
-#here is where we should make a sound level checker and adjust bar image based on the level. create a threshold for each level.
-#not required: a great feature that we could add is if the threshold can be adjusted with just one variable.
-#create array that stores thresholds and maybe applies the multiplier to them, which are then used in a big if else else else statement.
-# the if statement returns the propper bar image, and also would initiate the propper obstacle defeat sequence. 
+current_volume = 0.0
+
+def audio_callback(indata, frames, time, status):
+    global current_volume
+    volume_norm = np.linalg.norm(indata) * 10
+    current_volume = volume_norm
+
+# Start microphone stream
+stream = sd.InputStream(callback=audio_callback)
+stream.start()
+
+# ── Config ─────────────────────────────────────────────────────────────────
+BASE_THRESHOLDS = [0.01, 0.02, 0.04, 0.07, 0.11, 0.16, 0.22, 0.29, 0.37, 0.46]
+SENSITIVITY     = 1.0  # lower = more sensitive, higher = need to shout more
+THRESHOLDS      = [t * SENSITIVITY for t in BASE_THRESHOLDS]
 
 barGraphicSet = [
     pygame.image.load('graphics/bar0.png'),
@@ -25,5 +41,13 @@ barGraphicSet = [
     pygame.image.load('graphics/bar9.png'),
     pygame.image.load('graphics/bar10.png')
 ]
-#barGraphic = random.choice(barGraphicSet)
 
+def get_bar_level():
+    """Returns 0–10 based on current mic volume."""
+    level = 0
+    for threshold in THRESHOLDS:
+        if current_volume >= threshold:
+            level += 1
+        else:
+            break
+    return level
