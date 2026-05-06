@@ -1,4 +1,7 @@
 #import all required libraries or functions from other files here
+import turtle
+
+import keyboard
 import pygame
 import sys
 import random
@@ -40,7 +43,9 @@ onstacle_timer = 0
 score = 0
 difficulty = 0.0
 font = pygame.font.SysFont(None, 36)
-
+dogPosX = 300
+dogPosY = 500
+speed = 5
 running = True
 while running:
     for event in pygame.event.get(): #check for closing pygame prettymuch all the time lmao
@@ -59,7 +64,15 @@ while running:
     #load things that appear in game window here
     dogGraphic = Runner.dogGraphicSet[i] #this loads the propper dog pic in the animation
     screen.blit(Background.bground, (100,100))
-    screen.blit(dogGraphic, (300,500)) #this places the dog on the screen
+    screen.blit(dogGraphic, (dogPosX,dogPosY)) #this places the dog on the screen
+     
+    if keyboard.is_pressed('up'):
+        dogPosY -= 5
+        
+    # Move down (increase y)
+    elif keyboard.is_pressed('down'):
+        dogPosY += 5
+
     
     obstacle_instance.draw(screen) 
 
