@@ -4,6 +4,8 @@ import turtle
 import keyboard
 import pygame
 import sys
+import os
+import keyboard
 import random
 import obstacle
 import time
@@ -43,6 +45,7 @@ onstacle_timer = 0
 score = 0
 difficulty = 0.0
 font = pygame.font.SysFont(None, 36)
+started = False
 dogPosX = 300
 dogPosY = 500
 speed = 5
@@ -51,6 +54,10 @@ while running:
     for event in pygame.event.get(): #check for closing pygame prettymuch all the time lmao
         if event.type == pygame.QUIT:
             running = False
+    if started == False:
+        #add display start screen here
+        keyboard.wait('space')
+        started = True 
 
     screen.fill('grey32')
     bwindow.blit(bar.barGraphicSet[1], (0,0))
@@ -89,7 +96,8 @@ while running:
     bwindow.blit(bar.barGraphicSet[bar_level], (0,0))
     pygame.display.update()     # Update display (while running is set to true, until set to false aka game over or smthng.)
     clock.tick(15)    # cap framerate to 60 fps
-
+    
+    #os.execv(sys.executable, ['python'] + sys.argv)
 # Quit pygame once while loop is broken
 pygame.quit()
 bar.stream.stop()
