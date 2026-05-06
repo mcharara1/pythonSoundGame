@@ -30,6 +30,17 @@ mask = pygame.image.load('graphics/mask.png')
 bwindow = pygame.Surface((200,height - 200))
 bwindow.fill('white')
 # Main loop (the game runs inside this while true loop.)
+
+# Create obstacle instance
+obstacle_instance = obstacle.Obstacle(width, height)
+
+GROUND = 580
+obstacles = []
+onstacle_timer = 0
+score = 0
+difficulty = 0.0
+font = pygame.font.SysFont(None, 36)
+
 running = True
 while running:
     for event in pygame.event.get(): #check for closing pygame prettymuch all the time lmao
@@ -42,16 +53,22 @@ while running:
     if i == 4:
         i = 0
     
+     # Update obstacle
+    obstacle_instance.update()
+
     #load things that appear in game window here
     dogGraphic = Runner.dogGraphicSet[i] #this loads the propper dog pic in the animation
     screen.blit(Background.bground, (100,100))
     screen.blit(dogGraphic, (300,500)) #this places the dog on the screen
-    screen.blit(obstacle.slime, (600,500)) #this places the slime on screen
+    
+    obstacle_instance.draw(screen) 
 
     screen.blit(mask, (0,0)) #mask to cover everything that spills out of gwindow, such as ground or whatever
     
     screen.blit(gwindow, (100, 100)) #put game window on screen (the red border)
     #load things that appear outside the game window here
+    score_text = font.render(f"score: {score}", True, (0,0,0))
+    screen.blit (score_text, (50,50))
     screen.blit(bwindow, (1000, 100)) #put bar window on screen
     bwindow.blit(pygame.image.load('graphics/bar0.png'), (0,0))
     #barGraphic = random.choice(bar.barGraphicSet) #randomly select a bar image here
