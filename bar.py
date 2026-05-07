@@ -13,11 +13,13 @@ import Runner
 pygame.init()
 
 current_volume = 0.0
+SMOOTHING = 0.2
 
 def audio_callback(indata, frames, time, status):
     global current_volume
-    volume_norm = np.linalg.norm(indata) * 10
-    current_volume = volume_norm
+    raw_volume = np.linalg.norm(indata) * 10
+    current_volume = (1 - SMOOTHING) * current_volume + SMOOTHING * raw_volume
+
 
 # Start microphone stream
 stream = sd.InputStream(callback=audio_callback)
@@ -25,8 +27,10 @@ stream.start()
 
 # ── Config ─────────────────────────────────────────────────────────────────
 BASE_THRESHOLDS = [0.01, 0.02, 0.04, 0.07, 0.11, 0.16, 0.22, 0.29, 0.37, 0.46]
-SENSITIVITY     = 200  # lower = more sensitive, higher = need to shout more
-THRESHOLDS      = [t * SENSITIVITY for t in BASE_THRESHOLDS]
+SENSITIVITY = 100
+THRESHOLDS = [t * SENSITIVITY for t in BASE_THRESHOLDS]
+NOISE_FLOOR = 3.0
+
 
 barGraphicSet = [
     pygame.image.load('graphics/bar0.png'),
@@ -43,7 +47,10 @@ barGraphicSet = [
 ]
 
 def get_bar_level():
-    """Returns 0–10 based on current mic volume."""
+    """Returns 0-10 based on current mic volume."""
+    if current_volume < NOISE_FLOOR:
+        return 0
+
     level = 0
     for threshold in THRESHOLDS:
         if current_volume >= threshold:
