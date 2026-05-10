@@ -15,4 +15,3 @@ dogGraphicSet = [
     pygame.image.load('graphics/dog3.png'),
     pygame.image.load('graphics/dog4.png'),
 ]
- 

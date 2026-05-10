@@ -1,6 +1,5 @@
 #import all required libraries or functions from other files here
 import turtle
-
 import keyboard
 import pygame
 import sys
@@ -67,7 +66,8 @@ game_over = False
 obstacle_level = random.randint(1, 5)
 prev_obstacle_x = width
 bar_was_zero = True
-
+game_over_text = font.render("GAME OVER", True, (255, 0, 0))
+restart_text = font.render("Press R to restart", True, (255, 255, 255))
 start_ticks = pygame.time.get_ticks()
 
 def get_obstacle_speed():
@@ -85,17 +85,22 @@ while running:
             if event.key == pygame.K_SPACE and started == False:
                 started = True
 
+            if event.key == pygame.K_r and game_over == True:
+                os.execl(sys.executable, sys.executable, *sys.argv)
+
     screen.fill('grey32')
     
     if game_over:
-        game_over_text = font.render("GAME OVER", True, (255, 0, 0))
+        #game_over_text = font.render("GAME OVER", True, (255, 0, 0))
         screen.blit(game_over_text, (550, 350))
+        screen.blit(restart_text, (527, 400))
         pygame.display.update()
         clock.tick(15)
+        
         continue
     if started == False:
         bar_level = bar.get_bar_level()
-        print("Bar (before start):", bar_level)  # <-- ADD HERE
+        #print("Bar (before start):", bar_level)  # <-- ADD HERE
 
         start_text = font.render("Press SPACE to start", True, (255, 255, 255))
         screen.blit(start_text, (500, 350))
@@ -110,7 +115,7 @@ while running:
     obstacle_instance.update()
  
     dogGraphic = Runner.dogGraphicSet[i]
-    screen.blit(Background.bground, (100, 100))
+    screen.blit(Background.bground, (0, 0))
     screen.blit(dogGraphic, (dogPosX, dogPosY))
 
     if keyboard.is_pressed('up'):
