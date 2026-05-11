@@ -26,6 +26,7 @@ mask = pygame.image.load('graphics/mask.png')
 bwindow = pygame.Surface((200,height - 200))
 bwindow.fill('white')
 bground = pygame.image.load('graphics/Grass.png')
+sscreen = pygame.image.load('graphics/StartScreen.png')
 # Main loop (the game runs inside this while true loop.)
 
 # Create obstacle speed function first
@@ -122,8 +123,9 @@ while running:
         bar_level = bar.get_bar_level()
         #print("Bar (before start):", bar_level)  # <-- ADD HERE
 
+        screen.blit(sscreen,(0,0))
         start_text = font.render("Press SPACE to start", True, (255, 255, 255))
-        screen.blit(start_text, (500, 350))
+        screen.blit(start_text, (500, 570))
         pygame.display.update()
         clock.tick(60)
         continue
