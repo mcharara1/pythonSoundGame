@@ -79,12 +79,17 @@ start_ticks = pygame.time.get_ticks()
 
 bgSecPast = (pygame.time.get_ticks() - start_ticks) / 1000
 
+
 bg_pos_x = 100
 
 bg_pos_increment = -10
 B_Inc = 0
 obstacle_defeat = False
 
+pygame.mixer.music.load('graphics/RockyTop8Bit.wav')
+crashSound = pygame.mixer.Sound('graphics/Crash_sound.wav')
+pygame.mixer.music.play(-1)
+playLoseSound = 0
 #main game loop. this runs at a certain amount per second
 while running:
     for event in pygame.event.get():  # check for closing window
@@ -105,6 +110,11 @@ while running:
         screen.blit(game_over_text, (550, 350))
         screen.blit(restart_text, (527, 400))
         pygame.display.update()
+        pygame.mixer.music.stop()
+        if playLoseSound == 0:
+            pygame.mixer.Sound.play(crashSound)
+            playLoseSound += 1
+        
         clock.tick(15)
         
         continue
