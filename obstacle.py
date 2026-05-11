@@ -13,23 +13,6 @@ slimeSet = [
             pygame.image.load('graphics/slime5.png'),
             ]
 
-#slimeDeath = pygame.image.load('graphics/1i.png')
-#slime1Death2 = pygame.image.load('graphics/1is.png')
-
-#slime2Death1 = pygame.image.load('graphics/2i.png')
-#slime2Death2 = pygame.image.load('graphics/2is.png')
-
-#slime3Death1 = pygame.image.load('graphics/3i.png')
-#slime3Death2 = pygame.image.load('graphics/3is.png')
-
-#slime4Death1 = pygame.image.load('graphics/4i.png')
-#slime4Death2 = pygame.image.load('graphics/4is.png')
-
-#slime5Death1 = pygame.image.load('graphics/5i.png')
-#slime5Death2 = pygame.image.load('graphics/5is.png')
-
-
-
 orig_width, orig_height = slimeOrig.get_size()
 scale_factor = 3  # increase size by 300%
 new_size = (int(orig_width * scale_factor), int(orig_height * scale_factor))

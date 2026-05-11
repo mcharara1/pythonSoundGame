@@ -31,12 +31,15 @@ bground = pygame.image.load('graphics/Grass.png')
 # Create obstacle speed function first
 start_ticks = pygame.time.get_ticks()
 
+#define obstacle speed and make each obstacle slightly different
+
 def get_obstacle_speed():
     seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
-    base_speed = 7 + (seconds_passed * 0.08)
-    random_bonus = random.uniform(0, 2)
-    return min(base_speed + random_bonus, 16)
+    base_speed = 9 + (seconds_passed * 0.12)   # gets faster over time
+    random_bonus = random.uniform(0, 2)        # keeps it random
+    return min(base_speed + random_bonus, 12)  # maximum speed
 
+#load a different image in the even tof defeating an obstacle
 death_animations = {
     i: pygame.transform.scale(
         pygame.image.load(f"graphics/{i}i.png").convert_alpha(),
@@ -54,7 +57,7 @@ obstacle_instance.speed = get_obstacle_speed()
 obstacle_level = random.randint(1, 5)
 prev_obstacle_x = obstacle_instance.x
 
-
+#variables and constants
 GROUND = 580
 obstacles = []
 onstacle_timer = 0
@@ -76,16 +79,13 @@ start_ticks = pygame.time.get_ticks()
 
 bgSecPast = (pygame.time.get_ticks() - start_ticks) / 1000
 
-def get_obstacle_speed():
-    seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
-    base_speed = 9 + (seconds_passed * 0.12)   # gets faster over time
-    random_bonus = random.uniform(0, 2)        # keeps it random
-    return min(base_speed + random_bonus, 12)  # maximum speed
-
 bg_pos_x = 100
+
 bg_pos_increment = -10
 B_Inc = 0
 obstacle_defeat = False
+
+#main game loop. this runs at a certain amount per second
 while running:
     for event in pygame.event.get():  # check for closing window
         if event.type == pygame.QUIT:
